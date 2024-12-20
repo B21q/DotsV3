@@ -5,9 +5,8 @@
 <img class="special-img-class" src="/Screenshot1.png"/>
 <img class="special-img-class" src="/Screenshot2.png"/>
 
-<h1 align="center"> Informations </h1>
-   <br>• OS : Arch Linux</br>
-   <br>• WM : <a href="https://github.com/hyprwm/Hyprland">Hyprland</a></br>
+   <p>• OS : Arch Linux</p>
+   <p>• WM : <a href="https://github.com/hyprwm/Hyprland">Hyprland</a></p>
    <br>• LAUNCHER: <a href="https://github.com/davatorium/rofi">Rofi</a></br>
    <br>• BAR : <a href="https://github.com/elkowar/eww">EWW-Wayland</a></br>
    <br>• GTK-Theme: <a href="https://www.gnome-look.org/p/1681313">Gruvbox</a></br>
