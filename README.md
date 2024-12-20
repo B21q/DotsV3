@@ -1,6 +1,6 @@
 <h1> DotsV3 </h1>
 
-<img class="special-img-class" src="/Screenshot.png"/>
+<img class="special-img-class" src="/Screenshot4.png"/>
 <img class="special-img-class" src="/Screenshot0.png"/>
 <img class="special-img-class" src="/Screenshot1.png"/>
 <img class="special-img-class" src="/Screenshot2.png"/>
