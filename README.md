@@ -1,6 +1,8 @@
 <h1 align="center"> GnoLand </h1>
 
 <img class="special-img-class" src="/Screenshot.png"/>
+<img class="special-img-class" src="/Screenshot0.png"/>
+<img class="special-img-class" src="/Screenshot1.png"/>
 
 <h1 align="center"> Informations </h1>
    <br>• OS : Arch Linux</br>
