@@ -5,17 +5,13 @@
 <img class="special-img-class" src="/Screenshot1.png"/>
 <img class="special-img-class" src="/Screenshot2.png"/>
 
-   <p>• OS : Arch Linux</p>
-   <p>• WM : <a href="https://github.com/hyprwm/Hyprland">Hyprland</a></p>
-   <br>• LAUNCHER: <a href="https://github.com/davatorium/rofi">Rofi</a></br>
-   <br>• BAR : <a href="https://github.com/elkowar/eww">EWW-Wayland</a></br>
-   <br>• GTK-Theme: <a href="https://www.gnome-look.org/p/1681313">Gruvbox</a></br>
-   <br>• Icon-Theme: <a href="https://www.gnome-look.org/p/1359276/">Tela-circle-nord-darkd</a></br>
-   <br>• Cursor-Theme: <a href="https://www.gnome-look.org/p/1346778">Material-Cursor</a></br>
-   <br>• Browser: <a href="https://github.com/WaterfoxCo/Waterfox">Waterfox-G5</a></br>
-   <br>• Term: <a href="https://github.com/alacritty/alacritty">Alacritty</a></br>
-   <br>• Notifications: <a href="https://github.com/ErikReider/SwayNotificationCenter">Swaync (Sway Notifcation Center)</a></br>
-   <br>• Fonts : Feather and JetBrains Nerd Font</br>
+   <h4>• OS : Arch Linux</h4>
+   <h4>• WM : <a href="https://github.com/hyprwm/Hyprland">Hyprland</a></h4>
+   <h4>• LAUNCHER: <a href="https://github.com/davatorium/rofi">Rofi</a></h4>
+   <h4>• BAR : <a href="https://github.com/elkowar/eww">EWW-Wayland</a></h4>
+   <h4>• Cursor-Theme: <a href="https://www.gnome-look.org/p/1346778">Material-Cursor</a></h4>
+   <h4>• Term: <a href="https://github.com/alacritty/alacritty">Alacritty</a></h4>
+   <h4>• Fonts : Feather and JetBrains Nerd Font</h4>
 
 
 # **Table of contents**
