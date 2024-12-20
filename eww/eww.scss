@@ -1,0 +1,36 @@
+//* Variables *//
+
+* {
+  all: unset;
+  transition: 50ms;
+}
+
+@mixin window {
+  background-color: $bg;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 0.3rem 0.3rem $shadow;
+  margin: 1rem;
+}
+
+$shadow: #151515;
+$bg: #121013;
+$bg-alt: #171518;
+$bg-alt2: #312f32;
+$fg: #f0f0f0;
+$fg-alt: #cacaca;
+$fg-alt2: #a0a0a0;
+$black: #262626;
+$gray: #bababa;
+$red: #c4a39e;
+$green: #9ec49f;
+$yellow: #ceb188;
+$blue: #87adeb;
+$magenta: #c49ec4;
+$cyan: #9ec3c4;
+$white: #ffffff;
+
+
+@import "bar/bar.scss";
+@import "central/central.scss";
+@import "power/power.scss";
+

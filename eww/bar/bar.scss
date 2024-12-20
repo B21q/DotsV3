@@ -1,0 +1,61 @@
+// Global Styles
+.bar-widget {
+  @include window;
+  background-color: $bg;
+  color: $fg-alt;
+  padding: 1rem .4rem;
+}
+
+.launcher {
+  font-size: 2rem;
+  color: $gray;
+}
+
+.workspaces button {
+  font-size: 2rem;
+  padding: 0 .8rem;
+  color: $fg-alt2;
+}
+
+.workspaces button.active {
+  color: $green;
+}
+
+.central {
+  font-size: 1.4rem;
+  color: $blue;
+}
+
+.volume {
+  font-size: 1.3rem;
+  .volume-bar scale trough {
+    all: unset;
+    background-color: $black;
+    border-radius: 1rem;
+    min-width: 0.4rem;
+    min-height: 3rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0 2px 1px rgba(black, 0.3);
+  }
+
+  .volume-bar scale trough highlight {
+    all: unset;
+    background: $magenta;
+    border-radius: 1rem;
+  }
+}
+
+.line {
+  color: $fg;
+  background-color: $fg-alt;
+  min-width: 1rem;
+  min-height: .1rem;
+}
+
+.clock {
+  font-size: 1.4rem;
+  font-weight: bolder;
+  text-shadow: 1px 1px 1px $shadow;
+  color: $gray;
+  font-family: JetBrainsMono Nerd Font;
+}

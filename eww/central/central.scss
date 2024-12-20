@@ -1,0 +1,272 @@
+// Global Styles
+.central-widget {
+  @include window;
+  background-color: $bg;
+  border: .04rem solid $bg-alt2;  
+  color: $fg-alt;
+  padding: 1rem;
+}
+
+.logo {
+  font-size: 2.5rem;
+  color: $gray;
+}
+
+.user {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color: $gray;
+}
+
+.uptime {
+  font-size: 1rem;
+  color: $fg-alt2;
+  font-weight: bolder;
+}
+
+.line {
+  color: $fg;
+  background-color: $black;
+  min-width: 1rem;
+  min-height: .04rem;
+}
+
+.profile {
+  background-color: $bg-alt;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 4rem;
+  min-width: 4rem;
+  border-radius: 0.4rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.media {
+  .player {
+    background-color: $bg;
+    border-radius: 0.4rem;
+    border: .04rem solid $bg-alt2;
+    .cover {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 0.4rem;
+      min-height: 2rem;
+      min-width: 2rem;
+
+      .gradient {
+        border-radius: 0.4rem;
+        background: linear-gradient(
+          to right,
+          rgb($bg, 0.25),
+          rgba($bg-alt, 0.5)
+        );
+        text-shadow: 0 0 3px black;
+
+        .info {
+          padding: 1rem;
+
+          .title {
+            font-size: 1.2rem;
+            font-weight: bolder;
+          }
+
+          .artist,
+          .album {
+            font-size: 1.1rem;
+            color: $white;
+          }
+        }
+        .progress scale trough highlight {
+          //all: unset;
+          background-image: linear-gradient(
+            to right,
+            darken($color: $fg-alt, $amount: 35%),
+            $fg-alt2
+          );
+        }
+
+        .progress scale trough {
+          //all: unset;
+          background-color: rgba($cyan, 0.3);
+          box-shadow: 0 0 2px 1px rgba(black, 0.5);
+          min-height: 0.4rem;
+          min-width: 0.1rem;
+          margin: 0.2rem 1rem;
+        }
+
+        .inferior {
+          margin: 0.5rem 1rem 1rem;
+
+          .position {
+            font-size: 0.9rem;
+            min-width: 1rem;
+            color: $fg;
+          }
+
+          .time {
+            font-size: 1rem;
+            font-weight: bolder;
+            color: $fg-alt;
+            
+          }
+          .app {
+            font-size: 1.2rem;
+            margin-right: 1.4rem;
+
+            &.spotify {
+              color: $green;
+            }
+
+            &.brave {
+              color: $green;
+            }
+
+            &.firefox {
+              color: $yellow;
+            }
+          }
+
+          .controls {
+            border-radius: 0.4rem;
+            .previous,
+            .next {
+              font-size: 1.2rem;
+              color: $fg-alt2;
+
+              &.canGoPrevious {
+                color: $fg;
+              }
+              &.canGoNext {
+                color: $fg;
+              }
+            }
+
+            .toggle {
+              font-size: 1.2rem;
+              color: $fg-alt2;
+              &.canPlay,
+              &.canPause {
+                color: $fg;
+              }
+            }
+
+            .shuffle,
+            .loop {
+              font-size: 1.2rem;
+
+              &.on {
+                color: $green;
+              }
+              &.off {
+                color: $fg-alt2;
+              }
+            }
+          }
+        }
+      }
+    }
+    .sidebar {
+      padding: 1rem;
+      .slider scale trough highlight {
+        //all: unset;
+        background-image: linear-gradient(
+          to right,
+          darken($color: $green, $amount: 15%),
+          $green
+        );
+        border-radius: 0.4rem;
+      }
+
+      .slider scale trough {
+        //all: unset;
+        background-color: rgba($cyan, 0.2);
+        min-width: 0.5rem;
+        border-radius: 0.4rem;
+      }
+    }
+  }
+}
+
+.memory {
+  background-color: $bg-alt;
+  font-size: 1.4rem;
+  font-weight: bolder;
+  border-radius: .3rem;
+  border: .04rem solid $bg-alt2;
+  padding: 1rem;
+  color: $fg-alt;
+}
+
+.power {
+  font-size: 1.6rem;
+  color: $red;
+  font-weight: bolder;
+}
+
+
+.weather {
+  border: .04rem solid $bg-alt2;
+  border-radius: 0.4rem;
+  padding: 1rem;
+
+}
+
+.weather-current-icon {
+  font-size: 3rem;
+}
+
+.weather-location {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: $fg;
+}
+
+.weather-current-text {
+  font-size: 1.2rem;
+  color: $fg;
+}
+
+.weather-info {
+  margin-top: 0.5rem;
+}
+
+.weather-current-temp {
+  font-size: 2.5rem;
+  color: $blue;
+}
+
+.weather-current-maxtemp {
+  color: $fg;
+  font-size: 1.6rem;
+}
+
+.weather-current-mintemp {
+  font-size: 1.25rem;
+  margin-left: 0.5rem;
+  color: $fg;
+}
+
+.weather-hour {
+  margin: 0 0.5rem;
+}
+
+.weather-hour-icon {
+  font-size: 2rem;
+  margin: 0.25rem 0;
+}
+
+.weather-hour-temp {
+  color: $blue;
+  font-size: 1.1rem;
+}
+
+.weather-hour-time {
+  color: $fg;
+	font-size: 1rem;
+}
+
+.weather-connection-error {
+  font-size: 1.1rem;
+}

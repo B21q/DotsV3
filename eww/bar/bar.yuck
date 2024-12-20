@@ -1,0 +1,92 @@
+(defwidget bar-widget []
+  (box :orientation "v" :class "bar-widget" :halign "center"	
+	(top)
+	(bottom)
+	))
+
+(defwidget top []
+	(box :orientation "v" :space-evenly false :halign "center" :spacing 30
+		(launcher)
+		(workspaces)
+		(central)))
+
+(defwidget bottom []
+	(box :orientation "v" :space-evenly false  :halign "center" :valign "end" :spacing 15 
+		(volume)
+		(clock)))
+
+
+
+(defwidget launcher []
+	(eventbox :class "launcher" :cursor "pointer" :halign "fill" 
+		(button :onclick "eww open &" 
+		"")))
+
+
+(defwidget workspaces []
+	(box :orientation "v" :class "workspaces" :space-evenly false :spacing 4 :halign "center"
+		(for workspace in workspaces
+			(eventbox :onscroll "echo {} | sed -e 's/up/-1/g' -e 's/down/+1/g' | xargs hyprctl dispatch workspace" :cursor "pointer"
+				(button	:class {workspace.id == current_workspace ? "active" : "inactive"}
+						:onclick "hyprctl dispatch workspace ${workspace.id}"
+						{workspace.icon})))))
+
+(defvar workspaces '[
+  {"id": 1, "icon": "󰬺"},
+  {"id": 2, "icon": "󰬻"},
+  {"id": 3, "icon": "󰬼"},
+  {"id": 4, "icon": "󰬽"},
+  {"id": 5, "icon": "󰬾"}
+]')
+
+(defpoll current_workspace :interval "40ms"
+  "hyprctl activeworkspace | grep -oP '(?<=workspace ID )\\d+'")
+
+
+(defwidget o []
+	(eventbox :class "central" :cursor "pointer" :halign "fill" 
+		(button :onclick "eww open &" 
+		"")))
+
+
+
+(defwidget central []
+  (box :halign "center"
+    (eventbox :cursor "pointer" :halign "center" :onhover "eww open --toggle central &"
+      (button :class "central" :halign "center" :onclick "eww open --toggle central" :width 35 "" ))))
+
+
+
+(defwidget volume []
+	(eventbox :onhover "eww update volume_rev=true" :onhoverlost "eww update volume_rev=false"
+		(box :orientation "v" :class "volume" :space-evenly false       
+			(revealer :class "volume-bar" :transition "slideup" :reveal volume_rev 
+				(eventbox :cursor "pointer" :halign "center"
+					(scale :orientation "v" :tooltip {volume == "muted" ? "Muted" : "${volume}%"}
+							:value {volume == "muted" ? "0" : volume} 
+							:min 0 
+							:max 101 
+							:onchange "pamixer -u && pamixer --set-volume {}"
+							:flipped true)))
+						(eventbox :cursor "pointer" :onscroll "echo {} | sed -e 's/up/--up/g' -e 's/down/--down/g' | xargs volume"
+							(button :class "volume icon" :style {volume == 0 || volume == "muted" ? "color: #dd6777;" : "color: #cacaca;"} 
+									:tooltip {volume == "muted" ? "Muted" : "${volume}%" } 
+									:onclick "volume --toggle"
+									{volume == 0 || volume == "muted" ? "󰝟" : volume < 30 ? "" : volume < 75 ? "" : ""})))))
+
+(defwidget clock []
+  (box :class "clock" :orientation "v" :space-evenly false :valign "end" :halign "center"
+    (label :class "clock hour" :text hour)
+    (label :class "asas" :text "-")
+    (label :class "clock minute" :text minute)))
+
+(defwindow bar
+  :monitor 0
+  :exclusive true
+  :geometry (geometry :x "0%"
+                      :y "0%"
+					  :height "100%"
+                      :anchor "left center")
+  :reserve (struts :side "top" :distance "0%")
+  (bar-widget))
+

@@ -1,0 +1,58 @@
+(include "bar/bar.yuck")
+(include "central/central.yuck")
+(include "power/power.yuck")
+
+(defvar volume_rev false)
+(defvar open_osd false)
+
+(deflisten volume `scripts/volume`)
+
+(deflisten  mpris     `scripts/mpris.py`)
+(deflisten  positions `scripts/positions.py`)
+
+;; Music
+(defpoll music-art :interval "1s" "scripts/mediacontrol coverloc")
+(defpoll music-title :interval "1s" "scripts/mediacontrol title")
+(defpoll music-artist :interval "1s" "scripts/mediacontrol artist")
+(defpoll music-toggle :interval "1s" "scripts/mediacontrol statusicon")
+(defpoll music-status :interval "1s" "scripts/mediacontrol status")
+(defpoll music-position :interval "1s" "scripts/mediacontrol position")
+(defpoll music-length :interval "1s" "scripts/mediacontrol length")
+(defpoll music-positions :interval "1s" "scripts/mediacontrol positions")
+(defpoll music-lengths :interval "1s" "scripts/mediacontrol lengths")
+(defpoll music-shuffle-color :interval "1s" "scripts/mediacontrol shufflecolor")
+(defpoll music-shuffle-status :interval "1s" "playerctl -p spotify shuffle")
+(defpoll music-loop-icon :interval "1s" "scripts/mediacontrol loopicon")
+(defpoll music-loop-color :interval "1s" "scripts/mediacontrol loopcolor")
+(defpoll music-loop-status :interval "1s" "playerctl -p spotify loop")
+(defvar  music-rev false)
+
+;; Weather
+(defpoll weather-icon :interval "1h" "scripts/weather icon")
+(defpoll weather-temp :interval "1h" "scripts/weather current_temp")
+(defpoll weather-desc :interval "1h" "scripts/weather weather_desc")
+(defpoll weather-color :interval "1h" "scripts/weather hex")
+(deflisten weather :initial "null" "scripts/weather.py")
+
+
+
+;;Sysinfo
+(deflisten name `scripts/sysinfo.sh --name`)
+(deflisten kernel `scripts/sysinfo.sh --kernel`)
+(deflisten os `scripts/sysinfo.sh --os`)
+(deflisten wm `scripts/sysinfo.sh --wm`)
+(deflisten uptime `scripts/sysinfo.sh --uptime`)
+(deflisten mem `scripts/sysinfo.sh --mem`)
+(deflisten pkgs `scripts/sysinfo.sh --pkgs`)
+(deflisten cpu `scripts/sysinfo.sh --cpu`)
+
+(defvar perfil "./central/perfil.png")
+
+;; Date
+(defpoll hour :interval "1s" "date '+%H'")
+(defpoll day :interval "1s" "date '+%a %d %b %H:%M' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2));}1'")
+(defpoll minute :interval "1s" "date '+%M'")
+(defpoll date :interval "1h" "date '+%a, %d %B'")
+(defpoll calendar-day :interval "1h" "date '+%d'")
+(defpoll calendar-month :interval "1h" "date '+%m'")
+(defpoll calendar-year :interval "1h" "date '+%Y'")

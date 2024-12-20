@@ -1,0 +1,133 @@
+(defwidget central-widget []
+	(eventbox :onhoverlost "eww close central &"
+		(box :orientation "v" :class "central-widget" :space-evenly false :spacing 10
+			(home)
+			(line)
+			(weather)
+			(media)
+			(sysinfo))))
+
+(defwidget home []
+	(box :space-evenly false :spacing 40 :halign "center"	
+		(label :text "" :class "logo")
+			(box :orientation "v" :space-evenly false :halign "start" :spacing 1
+				(label :text {name} :class "user" :halign "start")
+				(label :text {uptime} :class "uptime" :halign "start")) 		
+					(eventbox :cursor "pointer"
+						(button  :onclick "eww open power &" :class "power" :halign "end" " "))))
+
+(defwidget line [] ;;This line is for decoration only
+	(box :orientation "v" :class "line" :space-evenly true :valign "start" :halign "fill"))
+
+(defwidget media []
+  (box :orientation "v" :class "media" :hexpand false :width 10
+    (for player in {mpris}
+      (media_player :player player))))
+
+(defwidget media_player [player] 
+  (box :class "player ${player.name}" :space-evenly true
+    (box :class "cover" :style "background-image: url('${player.artUrl}');" :space-evenly true :hexpand false
+      (box :orientation "v" :class "gradient" :space-evenly false :hexpand false
+        (box :orientation "v" :class "info" :space-evenly false :spacing 1
+          (label :class "title" :text {player.title} :limit-width 100 :wrap true :xalign 0)
+          (label :class "artist" :text {player.artist} :limit-width 100 :wrap true :xalign 0)
+          (label :class "album" :text {player.album} :limit-width 100 :wrap true :xalign 0))
+        (box :orientation "v" :space-evenly false :valign "END" :vexpand false
+          (eventbox :cursor "pointer" :visible {player.length != "null"} :class "progress" :hexpand false
+            (scale :value {positions[player.name].position} :min 0 :max {player.length} :onchange "playerctl -p ${player.name} position {}"))
+          (box :hexpand false :space-evenly false :class "inferior" :spacing 6
+            (label :class "app ${player.name}" :text {player.name == "spotify" ? "" : player.name =~ "chromium" ? "" : player.name =~ "firefox" ? "" : ":)"})
+            (box :class "position" :visible {player.length != "null"} :space-evenly false :hexpand false :width 20 :spacing 10
+              (label :class "time" :text {
+                  ;positions[player.name].position == "null" ? 0 : 
+                  positions[player.name].positionStr })
+              (label :text "/" :class "time")
+              (label :class "time" :text { player.length == "null" ? formattime(0, "%M:%S") : player.lengthStr }))
+            (box :class "controls" :halign "end" :hexpand true :space-evenly false :width 50 :spacing 10
+              (eventbox :cursor "pointer"
+                (button :onclick "playerctl -p spotify shuffle toggle" :class "shuffle ${player.shuffle ? "on" : "off"}" :tooltip {player.shuffle ? "On" : "Off"} :visible {player.loop != "null"}  ""))
+              (eventbox :cursor "pointer"
+                (button :onclick {
+                    player.loop == "None" ? 
+                    "playerctl -p spotify loop playlist" : 
+                    player.loop == "Playlist" ? 
+                    "playerctl -p spotify loop track" :
+                    "playerctl -p spotify loop none"
+                  }
+                  :class "loop ${player.loop == 'Playlist' || player.loop == 'Track' ? "on" : "off"}"
+                  :tooltip {player.loop}
+                  :visible {player.loop != "null"}
+                  {player.loop == "Track" ? "󰲸" :player.loop == "Playlist" ? "󰲸" : "󰐓"}
+                )
+              )
+              (eventbox :cursor {player.canGoPrevious ? "pointer" : "not-allowed"}
+                (button :class "previous ${player.canGoPrevious ? "canGoPrevious" : ""}" :onclick "playerctl -p ${player.name} previous" "" ))
+              (eventbox :cursor "pointer"
+                (button :class "toggle ${player.canPlay ? "canPlay" : player.canPause ? "canPause" : ""}" :width 20 :onclick "playerctl -p ${player.name} play-pause" 
+                  {
+                    player.status == "Playing" ? "" : 
+                    player.status == "Paused" ? "" : 
+                    ""
+                  }))
+              (eventbox :cursor {player.canGoNext ? "pointer" : "not-allowed"}
+                (button :class "next ${player.canGoNext ? "canGoNext" : ""}" :onclick "playerctl -p ${player.name} next" ""
+                )))))))))
+
+
+(defwidget sysinfo []
+	(box :space-evenly true :spacing 10
+		(memory)
+		(pkgs)))
+
+
+
+
+(defwidget memory []
+    (box :orientation "v" :space-evenly false
+      (label :class "memory" :text `    ${mem}`)))
+
+(defwidget pkgs []
+    (box :orientation "v" :space-evenly false
+      (label :class "memory" :text `󰏔   ${pkgs}`)))
+
+
+(defwidget weather []
+  (box :orientation "v" :space-evenly false :class "weather"
+    (label :class "weather-connection-error" :text "Carregando" :visible {weather != "null" ? false : true})
+      (box :orientation "h" :space-evenly false
+        (label :hexpand true :class "weather-current-icon" :halign "start" :valign "start" :text {weather.current.icon})
+          (box :hexpand true :orientation "v" :space-evenly false :halign "end" :valign "start"
+            (label :halign "end" :class "weather-location" :text {weather.location})
+            (label :limit-width 20 :halign "end" :class "weather-current-text" :text {weather.current.text})))
+
+        (box :orientation "h" :space-evenly false :class "weather-info"
+            (box :orientation "v" :space-evenly false :halign "start" :hexpand false
+                (label :halign "start" :class "weather-current-temp" :text {weather.current.temp})
+                (box :orientation "h" :space-evenly false
+                    (label :class "weather-current-maxtemp" :text {weather.maxtemp})
+                    (label :class "weather-current-mintemp" :text {weather.mintemp})
+                )
+            )
+            (box :orientation "h" :space-evenly false :halign "end" :hexpand true
+                (for hour in {weather.hourly}
+                    (box :orientation "v" :space-evenly false :class "weather-hour"
+                        (label :class "weather-hour-temp" :text {hour.temp})
+                        (label :class "weather-hour-icon" :text {hour.icon})
+                        (label :class "weather-hour-time" :text {hour.time})
+                    )
+                )
+            )
+        )
+    )
+)
+
+(defwindow central
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "0%"
+					  :width "0%"
+					  :height "0%"
+                      :anchor "left center")
+  :reserve (struts :side "top" :distance "0%")
+  (central-widget))
+

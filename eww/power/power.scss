@@ -1,0 +1,9 @@
+.power-widget {
+  @include window;
+  background-color: $bg;
+  border: .04rem solid $bg-alt2;  
+  color: $fg-alt;
+  padding: 1rem;
+}
+
+
